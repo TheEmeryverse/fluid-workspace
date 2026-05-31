@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluid Workspace - Agentic GUI OS</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Decoy credentials trap to absorb aggressive browser keychain scans -->
+  <div style="display: none;" aria-hidden="true">
+    <input type="text" name="username" autocomplete="username">
+    <input type="password" name="password" autocomplete="current-password">
+  </div>
+  <div class="app-container">
+    
+    <!-- Sidebar Control Center -->
+    <aside class="sidebar glass">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-glow"></span>
+          <h1>FLUID OS</h1>
+          <span class="version-tag">AI CORE v1.2</span>
+        </div>
+      </div>
+      
+      <!-- API Key Setup -->
+      <div class="panel api-key-panel">
+        <div class="panel-header">
+          <h3>GEMINI API KEY</h3>
+          <span class="status-indicator" id="api-status"></span>
+        </div>
+        <div class="panel-content" id="api-key-setup">
+          <input type="text" id="token-field" placeholder="Paste your API key here..." autocomplete="off">
+          <button id="save-key-btn">Activate</button>
+        </div>
+        <p class="api-help-text">Saved in local storage. Not sent elsewhere.</p>
+      </div>
+
+      <!-- Chat Console -->
+      <div class="panel chat-panel">
+        <div class="panel-header">
+          <h3>COGNITIVE CONSOLE</h3>
+          <span class="agent-activity-status" id="agent-status">IDLE</span>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <div class="message system">
+            <div class="message-content">
+              Welcome, operator. I am the Fluid Workspace AI Core. 
+              Ask me to build widgets, link them, or modify your environment.
+              <br><br>
+              <strong>Presets to try:</strong>
+              <ul class="presets-list">
+                <li><button class="preset-btn" data-prompt="Create a dynamic freelance invoice calculator widget with dev and design fields.">Create Invoice Calculator</button></li>
+                <li><button class="preset-btn" data-prompt="Create a simple Todo list widget.">Create Todo List</button></li>
+                <li><button class="preset-btn" data-prompt="Connect the calculator widget to the Todo list so I can track invoices as tasks.">Link Calculator to Todo</button></li>
+                <li><button class="preset-btn" data-prompt="Arrange the workspace in a clean vertical split layout.">Rearrange Layout</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <textarea id="prompt-field" placeholder="Instruct the AI Core..." rows="2"></textarea>
+          <button id="chat-send-btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- WebMCP Tool Registry -->
+      <div class="panel tools-panel">
+        <div class="panel-header">
+          <h3>WebMCP TOOL REGISTRY</h3>
+          <span class="tools-count" id="tools-count">0 ACTIVE</span>
+        </div>
+        <div class="panel-content">
+          <div class="tool-list" id="tool-list">
+            <p class="empty-state">No client-side tools registered. Create widgets to dynamically expose WebMCP tools!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Connection Pipelines -->
+      <div class="panel pipelines-panel">
+        <div class="panel-header">
+          <h3>AUTOMATION PIPELINES</h3>
+          <span class="pipelines-count" id="pipelines-count">0 LINKS</span>
+        </div>
+        <div class="panel-content">
+          <div class="pipeline-list" id="pipeline-list">
+            <p class="empty-state">No widgets connected. Snapping widgets close or asking the AI will establish data bridges.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <main class="workspace-area">
+      <!-- Workspace Header -->
+      <header class="workspace-header glass">
+        <div class="workspace-title-area">
+          <h2>FLUID CANVAS</h2>
+          <span class="canvas-coordinates" id="canvas-grid-info">GRID: 12-COLUMNS / AUTO-GAP</span>
+        </div>
+        <div class="workspace-actions">
+          <button class="header-btn" id="help-btn" style="border-color: var(--accent-cyan); color: var(--accent-cyan); margin-right: 8px;">Help Guide</button>
+          <button class="header-btn" id="clear-canvas-btn">Reset Workspace</button>
+        </div>
+      </header>
+
+      <!-- The Grid Canvas -->
+      <div class="canvas-container">
+        <!-- Dot Grid Pattern Background -->
+        <div class="dot-grid"></div>
+        
+        <!-- SVG layer for rendering connection curves between widgets -->
+        <svg class="connection-svg" id="connection-svg"></svg>
+        
+        <!-- Interactive Widget Grid -->
+        <div class="widget-grid" id="widget-grid">
+          <!-- Widget cards will be inserted here dynamically -->
+        </div>
+      </div>
+
+      <!-- Timeline & Shadow Workspace Preview -->
+      <footer class="shadow-footer glass">
+        <div class="footer-control-group">
+          <span class="footer-label">SHADOW STATE PREVIEW</span>
+          <div class="slider-wrapper">
+            <div class="segmented-control disabled" id="timeline-toggle">
+              <button class="seg-btn active" data-val="0" disabled>Live Workspace</button>
+              <button class="seg-btn" data-val="1" disabled>AI Proposed Preview</button>
+            </div>
+            <span class="slider-val" id="timeline-status">LIVE WORKSPACE</span>
+          </div>
+          <button class="footer-btn action-btn disabled" id="commit-preview-btn">Commit Changes</button>
+        </div>
+      </footer>
+    </main>
+
+  </div>
+
+  <!-- Polyfill and Application Scripts -->
+  <script src="webmcp-polyfill.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

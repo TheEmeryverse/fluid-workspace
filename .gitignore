@@ -1,0 +1,9 @@
+# Dependency directories
+node_modules/
+
+# Local env files
+.env
+.env.local
+
+# OS files
+.DS_Store

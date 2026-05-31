@@ -1,0 +1,16 @@
+{
+  "name": "fluid-workspace",
+  "version": "1.0.0",
+  "description": "An interactive, LLM-controlled GUI prototype using WebMCP and Gemini 3.5 Flash",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@google/genai": "latest",
+    "dotenv": "latest",
+    "express": "latest"
+  }
+}
