@@ -819,6 +819,7 @@ document.addEventListener('DOMContentLoaded', () => {
           responseParts.push({
             functionResponse: {
               name: call.name,
+              id: call.id, // Match the function call ID
               response: result
             }
           });

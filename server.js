@@ -162,6 +162,8 @@ app.post('/api/chat', async (req, res) => {
       });
     }
 
+    console.log('Gemini Chat History Payload:', JSON.stringify(messages, null, 2));
+
     // Call the Gemini 3.5 Flash model
     const response = await ai.models.generateContent({
       model: 'gemini-3.5-flash',
